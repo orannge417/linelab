@@ -5,7 +5,7 @@
 from io import BytesIO
 
 from linebot.models.send_messages import ImageSendMessage
-from linebot2.imageedit import imageedit
+from imageedit import imageedit
 from flask import Flask, request, abort
 
 from linebot import (
