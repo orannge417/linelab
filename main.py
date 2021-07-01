@@ -65,11 +65,12 @@ def handleimage(event):
     image = BytesIO(message_content.content)
     imageedit(image)
 
-    main_image_path= f"data/image.png"
+    image_message = 'a'
+    # main_image_path= f"data/image.png"
 
-    image_message = ImageSendMessage(
-        main_content_url = f"https://linebotforapp2.herokuapp.com/{main_image_path}"
-    )
+    # image_message = ImageSendMessage(
+    #     main_content_url = f"https://linebotforapp2.herokuapp.com/{main_image_path}"
+    # )
 
     line_bot_api.reply_message(event.reply_token, image_message)
         # event.reply_token,
