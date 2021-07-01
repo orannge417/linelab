@@ -7,6 +7,7 @@ from io import BytesIO
 from linebot.models.send_messages import ImageSendMessage
 from imageedit import imageedit
 from flask import Flask, request, abort
+from pathlib import Path
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -63,10 +64,16 @@ def handleimage(event):
     message_content = line_bot_api.get_message_content(message_id)
 
     image = BytesIO(message_content.content)
-    imageedit(image)
 
-    image_message = 'a'
-    main_image_path= f"data/image.png"
+    src_image_path = Path("data/images/{}.jpg".format(message_id)).absolute()
+    main_image_path = "data/images/{}_main.jpg".format(message_id)
+
+    # 画像を保存
+    save_image(message_id, src_image_path)
+
+    imageedit(src=src_image_path, desc=Path(main_image_path).absolute())
+
+
 
     image_message = ImageSendMessage(
         main_content_url = f"https://linebotforapp2.herokuapp.com/{main_image_path}"
@@ -76,6 +83,12 @@ def handleimage(event):
         # event.reply_token,
         # TextMessage(text='This is image.'))
 
+def save_image(message_id: str, save_path: str) -> None:
+    """保存"""
+    message_content = line_bot_api.get_message_content(message_id)
+    with open(save_path, "wb") as f:
+        for chunk in message_content.iter_content():
+            f.write(chunk)
 
 if __name__ == "__main__":
 #    app.run()

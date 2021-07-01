@@ -1,19 +1,11 @@
 from PIL import Image, ImageDraw
 import os 
 
-def imageedit(image):
-    try:
-        os.remove("data/image.png")
-    except FileNotFoundError:
-        print("hoge")
-
-    if image is None:
-        return 0
+def imageedit(src: str, desc: str, size = 800):
     
-    im = Image.open(image)
+    im = Image.open(src)
     draw = ImageDraw.Draw(im)
 
-    size = 800
     if im.width > size:
         proportion = size / im.width
     im = im.resize((int(im.width * proportion), int(im.height * proportion)))
@@ -33,6 +25,5 @@ def imageedit(image):
     # テキスト描画
     draw.text((x, y), text, fill=(0, 0, 0))
 
-    im.save("//data//image.png")
+    im.save(desc)
 
-    return 'a'
