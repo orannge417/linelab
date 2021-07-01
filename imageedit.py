@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import os 
 
-def imageedit(image=None):
+def imageedit(image):
     
     try:
         os.remove("data/image.png")

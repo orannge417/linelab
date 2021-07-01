@@ -63,21 +63,17 @@ def handleimage(event):
     message_content = line_bot_api.get_message_content(message_id)
 
     image = BytesIO(message_content.content)
+    imageedit(image)
 
-    result = imageedit(image)
+    main_image_path= f"data/image.png"
 
-    if isinstance(result, int):
-        image_message = 'Image is not processed successfully'  
-    elif isinstance(result, str):
-        main_image_path= f"data/image.png"
+    image_message = ImageSendMessage(
+        main_content_url = f"https://linebotforapp2.herokuapp.com/{main_image_path}"
+    )
 
-        image_message = ImageSendMessage(
-            main_content_url = f"https://linebotforapp2.herokuapp.com/{main_image_path}"
-        )
-
-        line_bot_api.reply_message(event.reply_token, image_message)
-            # event.reply_token,
-            # TextMessage(text='This is image.'))
+    line_bot_api.reply_message(event.reply_token, image_message)
+        # event.reply_token,
+        # TextMessage(text='This is image.'))
 
 
 if __name__ == "__main__":
