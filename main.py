@@ -64,15 +64,15 @@ def handleimage(event):
 
     image = BytesIO(message_content.content)
 
-    result = imageedit(image)
+    # result = imageedit(image)
 
-    if isinstance(result, int):
-        TextSendMessage(text='Image is not processed successfully')
+    # if isinstance(result, int):
+    #     TextSendMessage(text='Image is not processed successfully')
         
-    elif isinstance(result, str):
-        # main_image_path= f"data/image.png"
+    # elif isinstance(result, str):
+    #     # main_image_path= f"data/image.png"
 
-        ImageSendMessage(result)
+    #     ImageSendMessage(result)
 
     line_bot_api.reply_message(
         event.reply_token,
