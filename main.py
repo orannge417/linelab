@@ -13,6 +13,8 @@ from linebot.models import (
 )
 import os
 
+from linebot.models.messages import ImageMessage
+
 app = Flask(__name__)
 
 #環境変数取得
@@ -45,6 +47,13 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
+
+@handler.add(MessageEvent, message=ImageMessage)
+def handleimage(event):
+    line_bot_api.reply_message(
+        @event.reply_token,
+        TextMessage(text='This is image.')
+    )
 
 
 if __name__ == "__main__":
