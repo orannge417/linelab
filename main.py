@@ -5,7 +5,7 @@
 from io import BytesIO
 
 from linebot.models.send_messages import ImageSendMessage
-# from linebot2.imageedit import imageedit
+from linebot2.imageedit import imageedit
 from flask import Flask, request, abort
 
 from linebot import (
@@ -56,27 +56,28 @@ def handle_message(event):
 
 @handler.add(MessageEvent, message=ImageMessage)
 def handleimage(event):
-    # # メッセージのIDを取得
-    # message_id = event.message.id
+    # メッセージのIDを取得
+    message_id = event.message.id
     
-    # # message_idから画像のバイナリーデータを取得
-    # message_content = line_bot_api.get_message_content(message_id)
+    # message_idから画像のバイナリーデータを取得
+    message_content = line_bot_api.get_message_content(message_id)
 
-    # image = BytesIO(message_content.content)
+    image = BytesIO(message_content.content)
 
-    # result = imageedit(image)
+    result = imageedit(image)
 
-    # if isinstance(result, int):
-    #     TextSendMessage(text='Image is not processed successfully')
-        
-    # elif isinstance(result, str):
-    #     # main_image_path= f"data/image.png"
+    if isinstance(result, int):
+        image_message = 'Image is not processed successfully'  
+    elif isinstance(result, str):
+        main_image_path= f"data/image.png"
 
-    #     ImageSendMessage(result)
+        image_message = ImageSendMessage(
+            main_content_url = f"https://linebotforapp2.herokuapp.com/{main_image_path}"
+        )
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextMessage(text='This is image.'))
+        line_bot_api.reply_message(event.reply_token, image_message)
+            # event.reply_token,
+            # TextMessage(text='This is image.'))
 
 
 if __name__ == "__main__":
