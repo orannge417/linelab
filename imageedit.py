@@ -1,8 +1,15 @@
 from PIL import Image, ImageDraw, ImageFont
+import os 
 
 def imageedit(image=None):
+    
+    try:
+        os.remove("data/image.png")
+    except FileNotFoundError:
+        print("hoge")
+
     if image is None:
-        return 'Image is not being processed successfully'
+        return 0
     
     im = Image.open(image)
     draw = ImageDraw.Draw(im)
@@ -29,4 +36,6 @@ def imageedit(image=None):
     # テキスト描画
     draw.text((x, y), text, fill=(0, 0, 0), font=font)
 
-    return im
+    im.save("//data//image.png")
+
+    return 'a'

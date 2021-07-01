@@ -66,10 +66,12 @@ def handleimage(event):
 
     result = imageedit(image)
 
-    if isinstance(result, str):
-        TextSendMessage(text=result)
+    if isinstance(result, int):
+        TextSendMessage(text='Image is not processed successfully')
         
-    elif isinstance(result, image):
+    elif isinstance(result, str):
+        # main_image_path= f"data/image.png"
+
         ImageSendMessage(result)
 
     line_bot_api.reply_message(
