@@ -64,14 +64,13 @@ def handleimage(event):
 
     image = BytesIO(message_content.content)
 
-    try:
-        result = imageedit(image)
+    result = imageedit(image)
 
-        if isinstance(result, str):
-            TextSendMessage(text=result)
-            
-        elif isinstance(result, image):
-            ImageSendMessage(result)
+    if isinstance(result, str):
+        TextSendMessage(text=result)
+        
+    elif isinstance(result, image):
+        ImageSendMessage(result)
 
     line_bot_api.reply_message(
         event.reply_token,
