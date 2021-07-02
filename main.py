@@ -67,6 +67,7 @@ def handleimage(event):
 
     src_image_path = Path("data/images/{}.jpg".format(message_id)).absolute()
     main_image_path = "data/images/{}_main.jpg".format(message_id)
+    preview_image_path = "data/images/{}_preview.jpg".format(message_id)
 
     # 画像を保存
     save_image(message_id, src_image_path)
@@ -75,10 +76,13 @@ def handleimage(event):
 
 
 
-    image_message = 'a'
-    # ImageSendMessage(
-    #     main_content_url = f"https://linebotforapp2.herokuapp.com/{main_image_path}"
-    # )
+    image_message = ImageSendMessage(
+        main_content_url = f"https://linebotforlab2.herokuapp.com/{main_image_path}",
+        preview_image_url = f"https://linebotforlab2.herokuapp.com/{preview_image_path}",
+    )
+
+    app.logger.info(f"https://linebotforlab2.herokuapp.com/{main_image_path}")
+
 
     line_bot_api.reply_message(event.reply_token, image_message)
         # event.reply_token,
