@@ -61,7 +61,7 @@ def handleimage(event):
     message_id = event.message.id
     
     # # message_idから画像のバイナリーデータを取得
-    # message_content = line_bot_api.get_message_content(message_id)
+    message_content = line_bot_api.get_message_content(message_id)
 
     # image = BytesIO(message_content.content)
 
