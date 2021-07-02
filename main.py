@@ -83,7 +83,7 @@ def handleimage(event):
 
     # app.logger.info(f"https://linebotforlab2.herokuapp.com/{main_image_path}")
 
-    line_bot_api.reply_message(event.reply_token, text=message_id)
+    line_bot_api.reply_message(event.reply_token, text=str(message_id))
 
 
     # line_bot_api.reply_message(event.reply_token, image_message)
